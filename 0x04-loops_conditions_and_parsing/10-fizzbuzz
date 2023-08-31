@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+#the fizzbuzz comment
+
+LOOPY=1
+while [ $LOOPY -lt 101 ]
+do
+	if [ $((LOOPY%15)) = 0 ]
+	then
+		echo "FizzBuzz"
+	elif [ $((LOOPY%3)) = 0 ]
+	then
+		echo "Fizz"
+	elif [ $((LOOPY%5)) = 0 ]
+	then
+		echo "Buzz"
+	else
+		echo "$LOOPY"
+	fi
+	let LOOPY+=1
+done

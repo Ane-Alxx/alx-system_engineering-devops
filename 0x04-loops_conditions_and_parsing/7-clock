@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#CODE FOR 7CLOCK COMMENT
+
+SIXTIES=0
+while [ $SIXTIES -lt 13 ]
+do
+	echo "Hour: $SIXTIES"
+	MINS=1
+	while [ $MINS -lt 60 ]
+	do
+		echo $MINS
+	let MINS+=1
+	done
+	let SIXTIES+=1
+done

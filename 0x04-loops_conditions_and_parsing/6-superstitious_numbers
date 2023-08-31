@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# the superstisious number code
+
+LOOPY=1
+while [ $LOOPY -lt 21 ]
+do
+	case $LOOPY in
+
+		4)
+		echo $LOOPY
+		echo "bad luck from China"
+		;;
+	
+	9)
+		echo $LOOPY
+		echo "bad luck from Japan"
+		;;
+	
+	17)
+		echo $LOOPY
+		echo "bad luck from Italy"
+		;;
+
+	*)
+		echo $LOOPY
+		;;
+	esac
+
+	let LOOPY+=1
+done

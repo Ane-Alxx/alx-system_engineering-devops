@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# comment: to file or not to file code
+
+RECORD="school"
+
+if [ -e "$RECORD" ]
+then
+	echo "school file exists"
+	if [ ! -s "$RECORD" ]
+	then
+		echo "school file is empty"
+	else
+		echo "school file is not empty"
+	fi
+	if [ -f "$RECORD" ]
+	then
+		echo "school is a regular file"
+	fi
+else
+	echo "school file does not exist"
+fi
