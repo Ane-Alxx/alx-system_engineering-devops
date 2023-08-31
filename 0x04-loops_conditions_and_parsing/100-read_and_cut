@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# comment for 100
+
+in="/etc/passwd"
+while IFS= read -r ln
+do
+	echo "$ln" | cut -d':' --fields=1,3,6
+done < "$in"
