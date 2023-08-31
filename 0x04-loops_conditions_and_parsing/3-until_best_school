@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#Just a few lines of code to repeat 10 times
+
+LOOPY=10
+until [ $LOOPY -lt 1 ]
+do
+	echo "Best School"
+	let LOOPY-=1
+done

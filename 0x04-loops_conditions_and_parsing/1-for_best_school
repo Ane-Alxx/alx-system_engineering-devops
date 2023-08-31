@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Just a few lines of code to repeat 10 times
+
+for (( sim=1; sim<=10; sim++ ))
+do
+	echo "Best School"
+done

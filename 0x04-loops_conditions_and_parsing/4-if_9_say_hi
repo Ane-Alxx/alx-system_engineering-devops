@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+#say hi after 9 best schools
+
+LOOPY=0
+while [ $LOOPY -lt 11 ]
+do
+	if [ $LOOPY = 9 ]
+	then
+		echo "Hi"
+	else
+		echo "Best School"
+	fi
+	let LOOPY+=1
+done

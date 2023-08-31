@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#repeat thids 10 timws
+
+LOOPY=0
+while [ $LOOPY -lt 10 ]
+do
+	echo "Best School"
+	let LOOPY=LOOPY+1
+done

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#4 is bad, 8 is good, best school else
+
+LOOPY=1
+while [ $LOOPY -lt 11 ]
+do
+	if [ $LOOPY = 4 ]
+	then
+		echo "bad luck"
+	elif [ $LOOPY = 8 ]
+	then
+		echo "good luck"
+	else
+		echo "Best School"
+	fi
+	let LOOPY+=1
+done
