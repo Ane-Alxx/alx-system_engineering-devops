@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Comment: bash script for list your processes
+ps -a -x -u -f

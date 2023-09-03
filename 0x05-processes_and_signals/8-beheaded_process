@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Comment: bash script for beheaded process
+pkill -9 -f "bash ./7-highlander"

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Comment: bash script for what is my pid
+echo $$
