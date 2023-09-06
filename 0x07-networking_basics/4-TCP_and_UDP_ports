@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# comment for task 4
+
+netstat -l
