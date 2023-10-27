@@ -29,6 +29,3 @@ This will apply all of the Puppet manifests in the current directory.
 ## Contributing
 
 We encourage you to contribute to this project! If you find any errors or have any suggestions, please feel free to open an issue or submit a pull request.
-
-
-I have removed some of the more technical details, such as the specific version of puppet-lint required. I have also made the instructions more concise and easier to follow.
