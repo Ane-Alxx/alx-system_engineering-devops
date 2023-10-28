@@ -1,0 +1,7 @@
+#Here goes
+Host *
+  IdentityFile ~/.ssh/school
+  PasswordAuthentication no
+  HashKnownHosts yes
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials no
