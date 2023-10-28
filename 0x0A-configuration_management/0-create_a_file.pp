@@ -1,3 +1,4 @@
+#!/usr/bin/pup
 # This script will create a file in the tmp directory
 file { '/tmp/school':
   ensure => present,
