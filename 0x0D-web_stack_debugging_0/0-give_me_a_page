@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# first task in Webstack debugging series will train you in the art of debugging
+echo "ServerName localhost" >> /etc/apache2.conf
+service apache2 start
