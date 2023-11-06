@@ -6,7 +6,7 @@ sudo ufw allow 'Nginx HTTP'
 sudo mkdir -p /var/www/html /var/www/error
 sudo chmod -R 755 /var/www
 echo 'First person speaks' > /var/www/html/index.html
-echo ‘404 encountered. Not a webpage’ > /var/www/html/404.html
+echo '404 encountered. Not a webpage' > /var/www/html/404.html
 server_config=\
 "server {
 	listen 80 default_server;
