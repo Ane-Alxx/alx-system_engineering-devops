@@ -6,7 +6,7 @@ function add_subdomain() {
   local subdomain="$2"
 
   # Get the IP address of the subdomain.
-  local ip_address=$(dig +short "$subdomain.$domain")
+  local ip_address=$(dig +short "$subdomain.$domain" A)
 
   # Add the subdomain to the domain's zone file.
   sed -i "/$domain/a $subdomain A $ip_address" /etc/bind/zones/$domain.db
