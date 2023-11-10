@@ -1,19 +1,67 @@
 #!/usr/bin/env bash
-# solution for task 0: https_ssl task 0
-# A script for 
 
-domain_info () {
-	line=$(dig "$2"."$1" | grep -A1 'ANSWER SECTION:' | tr '\t' '\n' | tail -2 | tr '\n' ' ')
-	echo "$2 $line" | awk '{print "The subdomain " $1 " is a " $2 " record and points to " $3}'
+# Function to add a subdomain to a domain.
+function add_subdomain() {
+  local domain="$1"
+  local subdomain="$2"
+
+  # Get the IP address of the subdomain.
+  local ip_address=$(dig +short "$subdomain.$domain")
+
+  # Add the subdomain to the domain's zone file.
+  sed -i "/$domain/a $subdomain A $ip_address" /etc/bind/zones/$domain.db
 }
 
-if [ "$#" == 1 ]
-then
-	domain_info "$1" "www"
-	domain_info "$1" "lb-01"
-	domain_info "$1" "web-01"
-	domain_info "$1" "web-02"
-elif [ "$#" == 2 ]
-then
-	domain_info "$1" "$2"
-fi
+# Function to get the subdomains of a domain.
+function get_subdomains() {
+  local domain="$1"
+
+  # Get a list of all subdomains for the domain.
+  local subdomains=$(dig +short "$domain" SOA | grep -oE '[^.]+\.[^.]+')
+
+  # Return the list of subdomains.
+  echo "$subdomains"
+}
+
+# Main function.
+main() {
+  local domain="$1"
+  local subdomain="$2"
+
+  # Get the subdomains of the domain.
+  local subdomains=$(get_subdomains "$domain")
+
+  # If the subdomain name is not provided, display information for all of the domain's subdomains.
+  if [[ -z "$subdomain" ]]; then
+    for subdomain in $subdomains; do
+      display_subdomain_info "$domain" "$subdomain"
+    done
+  else
+    # Display information for the specified subdomain.
+    display_subdomain_info "$domain" "$subdomain"
+  fi
+}
+
+# Function to display information about a subdomain.
+function display_subdomain_info() {
+  local domain="$1"
+  local subdomain="$2"
+
+  # Get the record type for the subdomain.
+  local record_type=$(dig +short "$subdomain.$domain" A)
+
+  # Get the destination for the subdomain.
+  local destination=$(dig +short "$subdomain.$domain" A | awk '{print $NF}')
+
+  # Display the information about the subdomain.
+  echo "The subdomain $subdomain is a $record_type record and points to $destination"
+}
+
+# Add the subdomains www, lb-01, web-01, and web-02 to the domain.
+add_subdomain "$domain" "www"
+add_subdomain "$domain" "lb-01"
+add_subdomain "$domain" "web-01"
+add_subdomain "$domain" "web-02"
+
+# Display information for the subdomains.
+main "$domain" "$subdomain"
