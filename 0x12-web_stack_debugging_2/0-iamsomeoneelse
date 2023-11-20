@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Solution for task 0: 
+su "$1" -s /bin/bash -c 'whoami'
