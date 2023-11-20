@@ -1,0 +1,41 @@
+#
+# Rules that should be run before the ufw command line added rules. Custom
+# rules should be added to one of these chains:
+#   ufw-before-input
+#   ufw-before-output
+#   ufw-before-forward
+#
+*nat
+:PREROUTING ACCEPT [0:0]
+-A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80
+COMMIT
+
+*filter
+:INPUT ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+
+# Quickly process packets for which we already have a connection
+-A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A OUTPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+
+# Drop invalid packets (logs these in loglevel medium and higher)
+-A INPUT -m conntrack --ctstate INVALID -j DROP
+
+# Allow essential ICMP traffic
+-A INPUT -p icmp --icmp-type destination-unreachable -j ACCEPT
+-A INPUT -p icmp --icmp-type time-exceeded -j ACCEPT
+-A INPUT -p icmp --icmp-type parameter-problem -j ACCEPT
+-A INPUT -p icmp --icmp-type echo-request -j ACCEPT
+-A FORWARD -p icmp --icmp-type destination-unreachable -j ACCEPT
+-A FORWARD -p icmp --icmp-type time-exceeded -j ACCEPT
+-A FORWARD -p icmp --icmp-type parameter-problem -j ACCEPT
+-A FORWARD -p icmp --icmp-type echo-request -j ACCEPT
+
+# Allow DHCP client to work
+-A INPUT -p udp --sport 67 --dport 68 -j ACCEPT
+
+# Allow multicast traffic for mDNS and UPnP service discovery
+-A INPUT -p udp -d 224.0.0.251 --dport 5353 -j ACCEPT
+-A INPUT -p udp -d 239.255.255.250 --dport 1900 -j ACCEPT
