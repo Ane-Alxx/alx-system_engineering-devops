@@ -6,21 +6,21 @@ import sys
 
 
 def get_employee_todo_progress(employee_id):
-	# Check if TODO data is cached
+	""" Check if TODO data is cached """
 	if employee_id not in cached_todos:
-		# Fetch TODO items
+		""" Fetch TODO items """
 		todos_response = requests.get('https://jsonplaceholder.typicode.com/todos')
 		todos_data = todos_response.json()
 
-		# Cache TODO items
+		""" Cache TODO items """
 		cached_todos[employee_id] = todos_data
 
-	# Fetch user information
+	""" Fetch user information """
 	user_response = requests.get("https://jsonplaceholder.typicode.com/users/{}".format(employee_id))
 	user_data = user_response.json()
 	employee_name = user_data.get('name')
 
-	# Calculate progress
+	""" Calculate progress """
 	total_tasks = 0
 	completed_tasks = 0
 	for task in cached_todos[employee_id]:
@@ -29,7 +29,7 @@ def get_employee_todo_progress(employee_id):
 			if task.get('completed'):
 				completed_tasks += 1
 
-	# Format and display output
+	""" Format and display output """
 	progress_message = "Employee {} is done with tasks({}/{}):".format(employee_name, completed_tasks, total_tasks)
 	print(progress_message)
 
@@ -41,7 +41,7 @@ def get_employee_todo_progress(employee_id):
 	for task in completed_tasks_list:
 		print(task)
 
-# Initialize cached_todos dictionary
+""" Initialize cached_todos dictionary """
 cached_todos = {}
 
 if __name__ == "__main__":
